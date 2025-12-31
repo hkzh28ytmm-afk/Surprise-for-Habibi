@@ -1,0 +1,119 @@
+‏<!DOCTYPE html>
+‏<html lang="ar">
+‏<head>
+‏  <meta charset="UTF-8">
+‏  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+‏  <title>مفاجأة لطيفة 💖</title>
+‏  <style>
+‏    body {
+‏      font-family: 'Arial', sans-serif;
+‏      text-align: center;
+‏      margin: 0;
+‏      padding: 0;
+‏      height: 100vh;
+‏      display: flex;
+‏      flex-direction: column;
+‏      justify-content: center;
+‏      align-items: center;
+‏      background: linear-gradient(to bottom, #ffc0cb, #add8e6);
+‏      color: #333;
+‏      overflow: hidden;
+‏      position: relative;
+    }
+‏    h1 {
+‏      font-size: 2em;
+‏      margin-bottom: 40px;
+    }
+‏    button {
+‏      padding: 15px 30px;
+‏      font-size: 18px;
+‏      margin: 10px;
+‏      border: none;
+‏      border-radius: 10px;
+‏      cursor: pointer;
+‏      transition: transform 0.2s;
+    }
+‏    button:hover {
+‏      transform: scale(1.1);
+    }
+‏    .yes-btn {
+‏      background-color: #ff69b4;
+‏      color: white;
+    }
+‏    .no-btn {
+‏      background-color: #87cefa;
+‏      color: white;
+‏      position: relative;
+    }
+‏    .heart {
+‏      position: absolute;
+‏      font-size: 24px;
+‏      animation: float 2s linear forwards;
+    }
+‏    @keyframes float {
+‏      0% { transform: translateY(0) scale(1); opacity: 1; }
+‏      100% { transform: translateY(-200px) scale(1.5); opacity: 0; }
+    }
+‏  </style>
+‏</head>
+‏<body>
+‏  <h1 id="question">مرحبًا! لنبدأ 🤗</h1>
+‏  <div>
+‏    <button class="yes-btn" id="yesBtn">نعم</button>
+‏    <button class="no-btn" id="noBtn">لا</button>
+‏  </div>
+
+‏  <script>
+‏    const questions = [
+      "هل أنت كاتيا؟",
+      "هل تحبين أياد؟"
+    ];
+
+‏    const finalMessage = "💖 هوا أيضًا يحبك، اختارك رغم كل ما وضعته فيه، يريد مستقبلكم معًا، لذا كوني لطيفة معه ولا تتخلو عن بعضكم 💖";
+
+‏    let step = 0;
+
+‏    const questionEl = document.getElementById("question");
+‏    const yesBtn = document.getElementById("yesBtn");
+‏    const noBtn = document.getElementById("noBtn");
+
+‏    function moveNoButton() {
+‏      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+‏      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 100);
+‏      noBtn.style.position = 'absolute';
+‏      noBtn.style.left = `${x}px`;
+‏      noBtn.style.top = `${y}px`;
+    }
+
+‏    function createHeart() {
+‏      const heart = document.createElement('div');
+‏      heart.className = 'heart';
+‏      heart.innerText = '💖';
+‏      heart.style.left = Math.random() * window.innerWidth + 'px';
+‏      heart.style.top = (window.innerHeight - 100) + 'px';
+‏      document.body.appendChild(heart);
+‏      setTimeout(() => { heart.remove(); }, 2000);
+    }
+
+‏    noBtn.addEventListener("mouseover", moveNoButton);
+
+‏    yesBtn.addEventListener("click", () => {
+‏      step++;
+‏      if (step < questions.length) {
+‏        questionEl.innerText = questions[step];
+‏      } else {
+‏        questionEl.innerText = finalMessage;
+‏        yesBtn.style.display = 'none';
+‏        noBtn.style.display = 'none';
+        // إضافة القلوب الطائرة عند النهاية
+‏        for (let i = 0; i < 30; i++) {
+‏          setTimeout(createHeart, i * 100);
+        }
+      }
+    });
+
+    // البداية
+‏    questionEl.innerText = questions[step];
+‏  </script>
+‏</body>
+‏</html>
